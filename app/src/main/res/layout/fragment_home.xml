@@ -11,8 +11,9 @@
         android:layout_centerInParent="true">
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
+            android:layout_height="match_parent"
+            tools:listitem="@layout/list_country"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             >
 
 

@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.sandy.sandtracker.Activities.Adapters.CountryListAdapter;
 import com.sandy.sandtracker.Activities.Beans.CountryBeans;
+import com.sandy.sandtracker.Activities.Tools.StringTrimmer;
 import com.sandy.sandtracker.R;
 
 import org.json.JSONArray;
@@ -37,12 +38,14 @@ public class HomeFragment extends Fragment {
     CountryBeans countryBeans;
     View root;
     private HomeViewModel homeViewModel;
+    StringTrimmer stringTrimmer;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
          root = inflater.inflate(R.layout.fragment_home, container, false);
+         stringTrimmer=new StringTrimmer();
         initUI();
         reqToServer();
 
@@ -70,6 +73,7 @@ public class HomeFragment extends Fragment {
                             countryBeans.setConfirmed(item.getString("TotalConfirmed"));
                             countryBeans.setRecovered(item.getString("TotalRecovered"));
                             countryBeans.setDeaths(item.getString("TotalDeaths"));
+                            countryBeans.setTime(stringTrimmer.trimStr(item.getString("Date")));
 
 
                             countryBeansArrayList.add(countryBeans);

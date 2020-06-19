@@ -12,7 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.sandy.sandtracker.Activities.R;
+import com.sandy.sandtracker.R;
+
 
 public class GalleryFragment extends Fragment {
 

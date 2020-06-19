@@ -8,12 +8,12 @@
     <RelativeLayout
 
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp">
+        android:layout_height="@dimen/_130sdp">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cvCountryList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="@dimen/_20sdp">
 
             <LinearLayout
@@ -31,7 +31,6 @@
                         android:id="@+id/imgvRankCountry"
                         android:layout_width="@dimen/_32sdp"
                         android:layout_height="@dimen/_32sdp"
-                        app:civ_border_width="@dimen/_1sdp"
                         android:layout_marginLeft="@dimen/_26sdp"
                         android:layout_marginTop="@dimen/_26sdp"
                         android:scaleType="fitCenter"

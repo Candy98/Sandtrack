@@ -7,6 +7,15 @@ public class CountryBeans {
     private String confirmed;
     private String recovered;
     private String deaths;
+    private int colorCv;
+
+    public int getColorCv() {
+        return colorCv;
+    }
+
+    public void setColorCv(int colorCv) {
+        this.colorCv = colorCv;
+    }
 
     public String getRanking() {
         return ranking;

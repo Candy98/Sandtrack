@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sandy.sandtracker.Activities.Beans.CountryBeans;
@@ -57,6 +59,7 @@ public class CountryListAdapter extends RecyclerView.Adapter {
             genericViewHolder.tvDate.setText(name.getTime());
             genericViewHolder.tvRank.setText(name.getRanking());
             genericViewHolder.tvRecoveredCase.setText(name.getRecovered());
+            genericViewHolder.cardView.setCardBackgroundColor(ContextCompat.getColor(context,name.getColorCv()));
 
 
             //genericViewHolder.imgView.setImageResource(name.getActivityIcon());
@@ -110,6 +113,7 @@ public class CountryListAdapter extends RecyclerView.Adapter {
 
         private TextView tvCountryName, tvDate,tvAcctCase,tvRecoveredCase,tvDeathCase,tvRank;
         private ImageView imgvRankCountry;
+        private CardView cardView;
 
 
         ViewHolder(final View itemView) {
@@ -122,6 +126,7 @@ public class CountryListAdapter extends RecyclerView.Adapter {
             tvDeathCase=itemView.findViewById(R.id.tvDeathCase);
             tvRank=itemView.findViewById(R.id.tvRank);
             imgvRankCountry=itemView.findViewById(R.id.imgvRankCountry);
+            cardView=itemView.findViewById(R.id.cvCountryList);
 
 
 

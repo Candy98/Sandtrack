@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.sandy.sandtracker.Activities.Adapters.CountryListAdapter;
 import com.sandy.sandtracker.Activities.Beans.CountryBeans;
+import com.sandy.sandtracker.Activities.Tools.SandyColorizer;
 import com.sandy.sandtracker.Activities.Tools.StringTrimmer;
 import com.sandy.sandtracker.R;
 
@@ -28,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class HomeFragment extends Fragment {
 
@@ -37,15 +39,19 @@ public class HomeFragment extends Fragment {
     CountryListAdapter countryListAdapter;
     CountryBeans countryBeans;
     View root;
-    private HomeViewModel homeViewModel;
     StringTrimmer stringTrimmer;
+    SandyColorizer sandyColorizer;
+    private HomeViewModel homeViewModel;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-         root = inflater.inflate(R.layout.fragment_home, container, false);
-         stringTrimmer=new StringTrimmer();
+        root = inflater.inflate(R.layout.fragment_home, container, false);
+        stringTrimmer = new StringTrimmer();
+        sandyColorizer = new SandyColorizer();
         initUI();
         reqToServer();
 
@@ -59,6 +65,8 @@ public class HomeFragment extends Fragment {
             String url = "https://api.covid19api.com/summary";
             JSONObject object = new JSONObject();
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+               int num=0;
+
                 @Override
                 public void onResponse(JSONObject response) {
 
@@ -66,14 +74,15 @@ public class HomeFragment extends Fragment {
                         JSONArray array = response.getJSONArray("Countries");
                         for (int i = 0; i <= array.length(); i++) {
                             JSONObject item = array.getJSONObject(i);
-                            Log.i("Res",item.getString("Country"));
-                            countryBeans=new CountryBeans();
+                            Log.i("Res", Integer.toString(num));
+                            countryBeans = new CountryBeans();
                             countryBeans.setC_name(item.getString("Country"));
                             countryBeans.setRanking(Integer.toString(i));
                             countryBeans.setConfirmed(item.getString("TotalConfirmed"));
                             countryBeans.setRecovered(item.getString("TotalRecovered"));
                             countryBeans.setDeaths(item.getString("TotalDeaths"));
                             countryBeans.setTime(stringTrimmer.trimStr(item.getString("Date")));
+                            countryBeans.setColorCv(sandyColorizer.putColor());
 
 
                             countryBeansArrayList.add(countryBeans);
@@ -81,12 +90,7 @@ public class HomeFragment extends Fragment {
                             countryListAdapter.notifyDataSetChanged();
 
 
-
-
-
-
                         }
-
 
 
                     } catch (JSONException e) {
@@ -108,8 +112,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void initUI() {
-        rvCountryList=root.findViewById(R.id.rvCountryList);
-        countryListAdapter=new CountryListAdapter(context,countryBeansArrayList);
+        rvCountryList = root.findViewById(R.id.rvCountryList);
+        countryListAdapter = new CountryListAdapter(context, countryBeansArrayList);
         rvCountryList.setAdapter(countryListAdapter);
 
 
